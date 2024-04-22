@@ -5,9 +5,9 @@ import telebot
 from dotenv import load_dotenv
 from telebot.apihelper import ApiTelegramException
 
-from game_modes.capitals_game import play_capitals
-from game_modes.population_game import play_population
-from game_modes.flags_game import play_flags
+from game.capitals_game import play_capitals
+from game.population_game import play_population
+from game.flags_game import play_flags
 
 
 # Токен для телеграмм-бота
