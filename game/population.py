@@ -15,7 +15,7 @@ NUM_COUNTRIES = len(countries)
 TIME_LIMIT = 5
 
 
-# Отгадывай флаги
+# Сопоставляй население
 def play_population(message, bot: telebot, user: dict) -> None:
     user['hits'] = 0
     user['index'].clear()
