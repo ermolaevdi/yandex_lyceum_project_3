@@ -42,9 +42,9 @@ def start(message) -> None:
     users[message.chat.id] = {'hits': 0, 'index' : []}
     bot.send_message(message.chat.id, "Добро пожаловать, дорогой друг!\n"
         "\n"
-        "/capitals         : Находи столицы\n"
+        "/capitals        : Находи столицы\n"
         "/population   : Сопоставляй население\n"
-        "/flags               : Отгадывай флаги")
+        "/flags             : Отгадывай флаги")
 
 
 # Нажатие на кнопку "start"
@@ -52,9 +52,9 @@ def start(message) -> None:
 def bot_help(message) -> None:
     bot.send_message(message.chat.id, "Тренируйте географию вместе с Mouse_Bot!\n"
         "\n"
-        "/capitals         : Находи столицы\n"
+        "/capitals        : Находи столицы\n"
         "/population   : Сопоставляй население\n"
-        "/flags               : Отгадывай флаги\n"
+        "/flags             : Отгадывай флаги\n"
         "\n"
         "Используйте /back, чтобы выйти из текущей игры.\n"
         "\n"
@@ -88,9 +88,9 @@ def back(message) -> None:
     bot.send_message(message.chat.id, "Игровой режим отключен\n"
         "Выберите один из игровых режимов\n"
         "\n"
-        "/capitals         : Находи столицы\n"
+        "/capitals        : Находи столицы\n"
         "/population   : Сопоставляй население\n"
-        "/flags               : Отгадывай флаги\n"
+        "/flags             : Отгадывай флаги\n"
         "\n")
 
 
