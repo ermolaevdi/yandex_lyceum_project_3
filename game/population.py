@@ -21,8 +21,9 @@ def play_population(message, bot: telebot, user: dict) -> None:
     user['index'].clear()
     user['index'] = list(range(0, NUM_COUNTRIES))
     random.shuffle(user['index'])
-    bot.send_message(message.chat.id, "У какой страны население больше?")
+    bot.send_message(message.chat.id, "Население второй страны больше населения первой страны?")
     next_question(message, bot, user)
+
 
 # Проверка ответа
 def check_answer(message, bot: telebot, user: dict, c1: dict, c2: dict) -> None:
@@ -39,9 +40,15 @@ def check_answer(message, bot: telebot, user: dict, c1: dict, c2: dict) -> None:
         time.sleep(1)
         bot.send_message(message.chat.id, "Выберите новый игровой режим")
         return
-    
-    higher = c1 if c1['population'] > c2['population'] else c2
-    attemp = c2['country'] if message.text == "Higher" else c1['country']
+
+    if c1['population'] > c2['population']:
+        higher = c1
+    else:
+        higher = c2
+    if message.text == "Больше":
+        attemp = c2['country']
+    else:
+        attemp = c1['country']
 
     if higher['country'] == attemp:
         user['timer'].cancel()
@@ -53,13 +60,13 @@ def check_answer(message, bot: telebot, user: dict, c1: dict, c2: dict) -> None:
     else:
         user['timer'].cancel()
         bot.send_chat_action(message.chat.id, "typing")
-        bot.send_message(message.chat.id, f"<b><i>НЕПРАВИЛЬНО</i></b>,"
-                                          f"{c2['country']} {c2['flag'].encode().decode('unicode_escape')} имеет "
+        bot.send_message(message.chat.id, f"<b><i>НЕПРАВИЛЬНО</i></b>, "
+                                          f"{c2['country']} {c2['flag'].encode().decode('unicode_escape')} имеет"
                                           f"{c2['population']: ,}",parse_mode="html", disable_web_page_preview=True,
                          reply_markup=ReplyKeyboardRemove())
         bot.send_chat_action(message.chat.id, "typing")
         time.sleep(1)
-        bot.send_message(message.chat.id, ("&lt------- " + '<b><i>РЕШЕННЫЕ</i></b>' + f"{user['hits']}" + " -------&gt"),
+        bot.send_message(message.chat.id, ("&lt------- " + '<b><i>РЕШЕНО: </i></b>' + f"{user['hits']}" + " -------&gt"),
                          parse_mode= "html", disable_web_page_preview= True)
         time.sleep(1)
         time.sleep(1)
@@ -78,7 +85,7 @@ def next_question(message, bot: telebot, user: dict) -> None:
         row_width= 1
     )
 
-    markup.add("Higher", "Lower")
+    markup.add("Больше", "Меньше")
 
     bot.send_chat_action(message.chat.id, "typing")
     user['timer'] = threading.Timer(TIME_LIMIT, handle_timeout, args=[message, bot, user])
