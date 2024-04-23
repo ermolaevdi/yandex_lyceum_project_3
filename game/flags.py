@@ -16,7 +16,7 @@ NUM_COUNTRIES = len(countries)
 TIME_LIMIT = 5
 
 
-# Сопоставляй население
+# Отгадывай флаги
 def play_flags(message, bot: telebot, user: dict) -> None:
     user['hits'] = 0
     user['index'].clear()
@@ -60,7 +60,7 @@ def check_answer(message, bot: telebot, user: dict, country: str) -> None:
                          parse_mode="html", disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove())
         time.sleep(1)
         bot.send_chat_action(message.chat.id, "typing")
-        bot.send_message(message.chat.id, ("&lt------- " + '<b><i>РЕШЕННЫЕ</i></b>' + f"{user['hits']}" + " -------&gt"),
+        bot.send_message(message.chat.id, ("&lt------- " + '<b><i>РЕШЕНО: </i></b>' + f"{user['hits']}" + " -------&gt"),
                          parse_mode= "html", disable_web_page_preview= True)
         time.sleep(1)
         time.sleep(1)
